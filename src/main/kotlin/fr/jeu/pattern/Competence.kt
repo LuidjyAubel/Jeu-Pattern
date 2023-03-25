@@ -34,6 +34,6 @@ class Competence(unID : String, unNom : String, uneDesc : String, unCout : Doubl
         cout = x
     }
     fun setAcheter(){
-        acheter = !acheter
+        acheter = true
     }
 }

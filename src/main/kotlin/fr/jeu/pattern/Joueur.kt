@@ -1,37 +1,8 @@
 package fr.jeu.pattern
 
-class Joueur(unId : String,unNom :String, unPV : Double,
-             unPA : Double, uneVIT : Double, uneDEF : Double,unXP : Double, uneComp : MutableList<Competence>) {
-    private var id: String = unId
-    private var nom : String = unNom // le nom du joueur
-    private var PV: Double = unPV //point de vie
-    private var PA: Double = unPA //Point d'attaque
-    private var VIT: Double = uneVIT    // vitesse de l'ennemi
-    private var DEF: Double = uneDEF   // Defense de l'ennemi
-    private var XP : Double = unXP // l'expérience du joueur
-    private var Competence : MutableList<Competence> = uneComp // liste des compétence de l'utilisateur
+class Joueur(leLvl:Int) : stats{
+    /*private var Competence : ArrayList<Competence>() // liste des compétence de l'utilisateur
 
-    fun getId(): String {
-        return id
-    }
-    fun getNom() : String{
-        return nom
-    }
-    fun getPV(): Double {
-        return PV
-    }
-    fun getPA(): Double {
-        return PA
-    }
-    fun getVIT(): Double {
-        return VIT
-    }
-    fun getDEF(): Double {
-        return DEF
-    }
-    fun getXP() : Double{
-        return XP
-    }
     fun getCompetence(): MutableList<Competence>{
         return Competence
     }
@@ -40,29 +11,138 @@ class Joueur(unId : String,unNom :String, unPV : Double,
     }
     fun setUneCompetence(x : Competence){
         Competence.add(x)
+    }*/
+    /**
+     * Stats par défaut joueur
+     */
+    private var lvl : Int = 0
+    private var degatMin : Int = 1
+    private var degatMax : Int = 3
+    private var crittique : Double = 0.01
+    private var degatCrittique : Double = 1.5
+    private var dodge : Double = 0.01
+    private var def : Int = 1
+    private var pv : Int = 10
+    private var pvMax : Int = 10
+    private var nbTourDef : Int = 0
+    private var limiteTourDef : Int = 1
+    private var nbBalle : Int = 0
+    private var nbBalleMax : Int = 2
+    private var nbBalleRecharge : Int = 1
+
+    override fun getLvl(): Int {
+       return lvl
     }
-    fun setId(x: String) {
-        id = x
+
+    override fun setLvl(x:Int){
+        lvl = x
     }
-    fun setNom(x : String){
-        nom = x
+
+    override fun setDegatMin(x: Int) {
+        degatMin = x
     }
-    fun setPV(x: Double) {
-        PV = x
+
+    override fun getDegatMin(): Int {
+        return degatMin
     }
-    fun setPA(x: Double) {
-        PA = x
+
+    override fun setDegatMax(x: Int) {
+        degatMax = x
     }
-    fun setVIT(x: Double) {
-        VIT = x
+
+    override fun getDegatMax(): Int {
+        return degatMax
     }
-    fun setDEF(x: Double) {
-        DEF = x
+
+    override fun setCrittique(x: Double) {
+        crittique = x
     }
-    fun setXP(x : Double){
-        XP = x
+
+    override fun getCrittique(): Double {
+        return crittique
     }
-    override fun toString(): String {
-        return "Nom : "+nom+" PV : "+ PV+" XP : "+XP
+
+    override fun setDegatCrittique(x: Double) {
+       degatCrittique = x
+    }
+
+    override fun getDegatCrittique(): Double {
+        return degatCrittique
+    }
+
+    override fun setDodge(x: Double) {
+        dodge = x
+    }
+
+    override fun getDodge(): Double {
+        return dodge
+    }
+
+    override fun setDef(x: Int) {
+        def = x
+    }
+
+    override fun getDef(): Int {
+        return def
+    }
+
+    override fun setPv(x: Int) {
+        pv = x
+    }
+
+    override fun getPv(): Int {
+        return pv
+    }
+
+    override fun setPvMax(x: Int) {
+        pvMax = x
+    }
+
+    override fun getPvMax(): Int {
+        return pvMax
+    }
+
+    override fun setNbTourDef(x: Int) {
+       nbTourDef = x
+    }
+
+    override fun getNbTourDef(): Int {
+        return nbTourDef
+    }
+
+    override fun setLimiteTourDef(x: Int) {
+        limiteTourDef =x
+    }
+
+    override fun getLimiteTourDef(): Int {
+        return limiteTourDef
+    }
+
+    override fun setNbBalle(x: Int) {
+        nbBalle = x
+    }
+
+    override fun getNbBalle(): Int {
+        return nbBalle
+    }
+
+    override fun setNbBalleMax(x: Int) {
+        nbBalleMax = x
+    }
+
+    override fun getNbBalleMax(): Int {
+        return nbBalleMax
+    }
+
+    override fun setNbBalleRecharge(x: Int) {
+        nbBalleRecharge = x
+    }
+
+    override fun getNbBalleRecharge(): Int {
+        return nbBalleRecharge
+    }
+
+    override fun getStats() {
+        System.out.println("TODO")
     }
 }
