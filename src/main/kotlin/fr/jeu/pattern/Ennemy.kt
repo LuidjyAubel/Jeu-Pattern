@@ -1,31 +1,30 @@
 package fr.jeu.pattern
 
-class Ennemy(unId : String, unPV : Double,
-          unPA : Double, uneVIT : Double, uneDEF : Double, boolBoss : Boolean){
+abstract class Ennemy{
 
-    private var id : String = unId
-    private var PV : Double = unPV //point de vie
-    private var PA : Double = unPA //Point d'attaque
-    private var VIT :Double = uneVIT    // vitesse de l'ennemi
-    private var DEF : Double = uneDEF   // Defense de l'ennemi
-    private var Boss : Boolean = boolBoss // est un boss ?
+    protected lateinit var id : String
+    protected abstract var PV : Double //point de vie
+    protected abstract var PA : Double//Point d'attaque
+    protected abstract var VIT :Double  // vitesse de l'ennemi
+    protected abstract var DEF : Double  // Defense de l'ennemi
+    protected abstract var Boss : Boolean // est un boss ?
 
-    fun getId(): String {
+    open fun getId(): String {
         return id
     }
-    fun getPV(): Double {
+    open fun getPV(): Double {
         return PV
     }
-    fun getPA(): Double {
+    open fun getPA(): Double {
         return PA
     }
-    fun getVIT(): Double {
+    open fun getVIT(): Double {
         return VIT
     }
-    fun getDEF(): Double {
+    open fun getDEF(): Double {
         return DEF
     }
-    fun getBoss(): Boolean{
+    open fun getBoss(): Boolean{
         return Boss
     }
     fun setId(x : String) {
