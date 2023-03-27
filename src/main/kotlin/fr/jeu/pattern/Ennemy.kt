@@ -1,48 +1,140 @@
 package fr.jeu.pattern
 
-abstract class Ennemy{
+class Ennemy() : stats{
+    /**
+     * Stats par défaut ennemy
+     */
+    private var lvl : Int = 0
+    private var degatMin : Int = 1
+    private var degatMax : Int = 0
+    private var crittique : Double = 0.01
+    private var degatCrittique : Double = 1.25
+    private var dodge : Double = 0.01
+    private var def : Int = 0
+    private var pv : Int = 3
+    private var pvMax : Int = 3
+    private var nbTourDef : Int = 0
+    private var limiteTourDef : Int = 1
+    private var nbBalle : Int = 0
+    private var nbBalleMax : Int = 2
+    private var nbBalleRecharge : Int = 1
 
-    protected lateinit var id : String
-    protected abstract var PV : Double //point de vie
-    protected abstract var PA : Double//Point d'attaque
-    protected abstract var VIT :Double  // vitesse de l'ennemi
-    protected abstract var DEF : Double  // Defense de l'ennemi
-    protected abstract var Boss : Boolean // est un boss ?
+    override fun getLvl(): Int {
+        return lvl
+    }
 
-    open fun getId(): String {
-        return id
+    override fun setLvl(x:Int){
+        lvl = x
     }
-    open fun getPV(): Double {
-        return PV
+
+    override fun setDegatMin(x: Int) {
+        degatMin = x
     }
-    open fun getPA(): Double {
-        return PA
+
+    override fun getDegatMin(): Int {
+        return degatMin
     }
-    open fun getVIT(): Double {
-        return VIT
+
+    override fun setDegatMax(x: Int) {
+        degatMax = x
     }
-    open fun getDEF(): Double {
-        return DEF
+
+    override fun getDegatMax(): Int {
+        return degatMax
     }
-    open fun getBoss(): Boolean{
-        return Boss
+
+    override fun setCrittique(x: Double) {
+        crittique = x
     }
-    fun setId(x : String) {
-        id = x
+
+    override fun getCrittique(): Double {
+        return crittique
     }
-    fun setPV(x : Double) {
-        PV = x
+
+    override fun setDegatCrittique(x: Double) {
+        degatCrittique = x
     }
-    fun setPA(x : Double) {
-        PA = x
+
+    override fun getDegatCrittique(): Double {
+        return degatCrittique
     }
-    fun setVIT(x : Double) {
-        VIT = x
+
+    override fun setDodge(x: Double) {
+        dodge = x
     }
-    fun setDEF(x : Double){
-        DEF = x
+
+    override fun getDodge(): Double {
+        return dodge
     }
-    fun setBoss(x : Boolean){
-        Boss = x
+
+    override fun setDef(x: Int) {
+        def = x
+    }
+
+    override fun getDef(): Int {
+        return def
+    }
+
+    override fun setPv(x: Int) {
+        pv = x
+    }
+
+    override fun getPv(): Int {
+        return pv
+    }
+
+    override fun setPvMax(x: Int) {
+        pvMax = x
+    }
+
+    override fun getPvMax(): Int {
+        return pvMax
+    }
+
+    override fun setNbTourDef(x: Int) {
+        nbTourDef = x
+    }
+
+    override fun getNbTourDef(): Int {
+        return nbTourDef
+    }
+
+    override fun setLimiteTourDef(x: Int) {
+        limiteTourDef =x
+    }
+
+    override fun getLimiteTourDef(): Int {
+        return limiteTourDef
+    }
+
+    override fun setNbBalle(x: Int) {
+        nbBalle = x
+    }
+
+    override fun getNbBalle(): Int {
+        return nbBalle
+    }
+
+    override fun setNbBalleMax(x: Int) {
+        nbBalleMax = x
+    }
+
+    override fun getNbBalleMax(): Int {
+        return nbBalleMax
+    }
+
+    override fun setNbBalleRecharge(x: Int) {
+        nbBalleRecharge = x
+    }
+
+    override fun getNbBalleRecharge(): Int {
+        return nbBalleRecharge
+    }
+
+    override fun getStatsCombat() {
+        System.out.println("Joueur")
+        System.out.println("PV : "+pv)
+        System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
+        System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef)
     }
 }

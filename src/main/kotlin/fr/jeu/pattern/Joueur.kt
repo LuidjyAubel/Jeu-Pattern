@@ -1,17 +1,6 @@
 package fr.jeu.pattern
 
-class Joueur(leLvl:Int) : stats{
-    /*private var Competence : ArrayList<Competence>() // liste des compétence de l'utilisateur
-
-    fun getCompetence(): MutableList<Competence>{
-        return Competence
-    }
-    fun setCompetence(x : MutableList<Competence>){
-        Competence = x
-    }
-    fun setUneCompetence(x : Competence){
-        Competence.add(x)
-    }*/
+class Joueur() : stats{
     /**
      * Stats par défaut joueur
      */
@@ -142,7 +131,10 @@ class Joueur(leLvl:Int) : stats{
         return nbBalleRecharge
     }
 
-    override fun getStats() {
-        System.out.println("TODO")
+    override fun getStatsCombat() {
+        System.out.println("Joueur")
+        System.out.println("PV : "+pv)
+        System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
+        System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef)
     }
 }

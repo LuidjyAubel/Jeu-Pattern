@@ -103,5 +103,5 @@ interface stats {
      * Affiche les stats
      * @return stats
      */
-    fun getStats()
+    fun getStatsCombat()
 }
