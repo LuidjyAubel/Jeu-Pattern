@@ -1,6 +1,6 @@
 package fr.jeu.pattern
 
-class Ennemy() : stats{
+open class Ennemy() : stats{
     /**
      * Stats par défaut ennemy
      */
