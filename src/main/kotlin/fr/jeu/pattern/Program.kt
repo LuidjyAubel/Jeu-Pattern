@@ -37,40 +37,16 @@ fun combat(){
             } else {
                 println("1 - Vous ne pouvez plus bloquer")
             }
-            var rep = console.nextLine()
+            val rep = console.nextLine()
             when (rep) {
                 "1" -> {
-                    if(p.getNbBalle() < 0){
-                        error = true
-                    }
-                    p.setNbTourDef(0)
-                    var degat = p.getDegatMin()+(0..p.getDegatMax()).random()
-                    if((p.getCrittique()*100) >= (0..100).random()){
-                        println("Coup crittique !!!")
-                        degat = (degat * p.getDegatCrittique()).toInt()
-                    }
-                    if(degat > ennemy.getDef()){
-                        ennemy.setPv(ennemy.getPv()- degat + ennemy.getDef())
-                    }
+                    error = atqJoueur()
                 }
                 "2" -> {
-                    if (p.getNbBalle() == p.getNbBalleMax()){
-                        error = true
-                    } else {
-                        p.setNbTourDef(0)
-                        var nbBalle = p.getNbBalle()+p.getNbBalleRecharge()
-                        if (p.getNbBalleMax()<nbBalle){
-                            p.setNbBalle(p.getNbBalleMax())
-                        } else {
-                            p.setNbBalle(nbBalle)
-                        }
-                    }
+                    error = rechJoueur()
                 }
                 "3" -> {
-                    if (p.getLimiteTourDef() == p.getNbTourDef()){
-                        error = true
-                    }
-                    p.setNbTourDef(p.getNbTourDef()+1)
+                    error = defJoueur()
                 }
                 else -> {
                     error = true
@@ -78,4 +54,45 @@ fun combat(){
             }
         }
     }
+}
+fun atqJoueur(): Boolean {
+    var error = false
+    if(p.getNbBalle() < 0){
+        error = true
+    }
+    p.setNbTourDef(0)
+    var degat = p.getDegatMin()+(0..p.getDegatMax()).random()
+    if((p.getCrittique()*100) >= (0..100).random()){
+        println("Coup crittique !!!")
+        degat = (degat * p.getDegatCrittique()).toInt()
+    }
+    if(degat > ennemy.getDef()){
+        ennemy.setPv(ennemy.getPv() - degat + ennemy.getDef())
+    }
+    return error
+}
+
+fun rechJoueur(): Boolean {
+    var error = false
+    if (p.getNbBalle() == p.getNbBalleMax()){
+        error = true
+    } else {
+        p.setNbTourDef(0)
+        var nbBalle = p.getNbBalle()+p.getNbBalleRecharge()
+        if (p.getNbBalleMax()<nbBalle){
+            p.setNbBalle(p.getNbBalleMax())
+        } else {
+            p.setNbBalle(nbBalle)
+        }
+    }
+    return error
+}
+
+fun defJoueur(): Boolean {
+    var error = false
+    if (p.getLimiteTourDef() == p.getNbTourDef()){
+        error = true
+    }
+    p.setNbTourDef(p.getNbTourDef()+1)
+    return error
 }
