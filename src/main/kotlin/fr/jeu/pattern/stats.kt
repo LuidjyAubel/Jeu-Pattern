@@ -54,8 +54,8 @@ interface stats {
      * Nombre de pv actuelle
      * @return pv
      */
-    fun setPv(x:Int)
-    fun getPv(): Int
+    fun setPv(x:Double)
+    fun getPv(): Double
 
     /**
      * Nombre de pv max

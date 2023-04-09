@@ -11,7 +11,7 @@ class Joueur() : stats{
     private var degatCrittique : Double = 1.5
     private var dodge : Double = 0.01
     private var def : Int = 1
-    private var pv : Int = 10
+    private var pv : Double = 10.0
     private var pvMax : Int = 10
     private var nbTourDef : Int = 0
     private var limiteTourDef : Int = 1
@@ -75,11 +75,11 @@ class Joueur() : stats{
         return def
     }
 
-    override fun setPv(x: Int) {
+    override fun setPv(x: Double) {
         pv = x
     }
 
-    override fun getPv(): Int {
+    override fun getPv(): Double {
         return pv
     }
 
@@ -132,9 +132,9 @@ class Joueur() : stats{
     }
 
     override fun getStatsCombat() {
-        System.out.println("Joueur")
-        System.out.println("PV : "+pv)
+        System.out.println("\nJoueur")
+        System.out.println("PV : "+pv+" / "+pvMax)
         System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
-        System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef)
+        System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef+"\n")
     }
 }
