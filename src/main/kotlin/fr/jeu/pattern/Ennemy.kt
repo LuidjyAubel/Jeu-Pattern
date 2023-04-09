@@ -2,7 +2,7 @@ package fr.jeu.pattern
 
 open class Ennemy() : stats{
     /**
-     * Stats par défaut ennemy
+     * Stats par défaut ennemi
      */
     private var lvl : Int = 0
     private var degatMin : Int = 1
@@ -18,6 +18,58 @@ open class Ennemy() : stats{
     private var nbBalle : Int = 0
     private var nbBalleMax : Int = 2
     private var nbBalleRecharge : Int = 1
+
+    fun setLevelBase(){
+        lvl = 0
+        degatMin = 1
+        degatMax = 0
+        crittique = 0.01
+        degatCrittique = 1.25
+        dodge = 0.01
+        def = 0
+        pv = 3.0
+        pvMax = 3
+        nbTourDef = 0
+        limiteTourDef = 1
+        nbBalle = 0
+        nbBalleMax = 2
+        nbBalleRecharge = 1
+    }
+
+    fun lvlUp(boolSpe : Boolean){
+        if (boolSpe){
+            when ((0..2).random()) {
+                3 ->{
+                    limiteTourDef++
+                }
+                4 ->{
+                    nbBalleMax++
+                }
+                5 ->{
+                    nbBalleRecharge++
+                }
+            }
+        } else {
+            when ((0..2).random()) {
+                0 -> {
+                    degatMin++
+                    degatMax += 3
+                }
+
+                1 -> {
+                    pvMax += 3
+                    def++
+                }
+
+                2 -> {
+                    crittique += 0.01
+                    dodge += 0.01
+                }
+            }
+        }
+        degatCrittique += 0.01
+        pv = pvMax.toDouble()
+    }
 
     override fun getLvl(): Int {
         return lvl

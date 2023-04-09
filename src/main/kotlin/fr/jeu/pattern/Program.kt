@@ -5,6 +5,7 @@ import kotlin.collections.ArrayList
 
 private val p : Joueur = Joueur()
 private val pointComp = 0
+private var lvl = 0
 private var ennemy : Ennemy = Ennemy()
 val scanner = Scanner(System.`in`)
 
@@ -21,10 +22,15 @@ fun main(args: Array<String>) {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez gagné")
                     println("--------------------------------------------------\n")
+                    lvl++
+                    val boolSpe = lvl % 5 == 0
+                    ennemy.lvlUp(boolSpe)
                 } else {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez perdu")
                     println("--------------------------------------------------\n")
+                    ennemy.setLevelBase()
+                    p.setPv(p.getPv())
                 }
             }
             "2" -> {
