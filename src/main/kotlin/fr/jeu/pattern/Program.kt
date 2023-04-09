@@ -5,22 +5,33 @@ import kotlin.collections.ArrayList
 
 private val p : Joueur = Joueur()
 private var ennemy : Ennemy = Ennemy()
-private val console = Scanner(System.`in`)
 val scanner = Scanner(System.`in`)
+
 fun main(args: Array<String>) {
-    println("Jeu avec les design pattern !")
-    println("1 - Combattre")
-    println("2 - Voir ses stats")
-    println("3 - Acheter compétences")
-    combat()
+    do {
+        println("Jeu avec les design pattern !")
+        println("1 - Combattre")
+        println("2 - Voir ses stats")
+        println("3 - Acheter compétences")
+        when (scanner.nextLine()) {
+            "1" -> {
+                    combat()
+            }
+            "2" -> {
+                //TODO
+            }
+            "3" -> {
+                //TODO
+            }
+        }
+    } while (true)
 }
 
 fun combat(){
     ennemy = Ennemy()
     while (ennemy.getPv() > 0 && p.getPv() > 0 ){
-        var error = true
-        while (error) {
-            error = false
+        var error = false
+        do {
             println(ennemy.getStatsCombat())
             println("--------------------------------------------------")
             println(p.getStatsCombat())
@@ -55,7 +66,7 @@ fun combat(){
                     error = true
                 }
             }
-        }
+        } while (error)
     }
     if(p.getPv() > 0){
         println("\n--------------------------------------------------")
