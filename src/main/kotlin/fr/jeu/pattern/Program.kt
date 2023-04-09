@@ -6,6 +6,7 @@ import kotlin.collections.ArrayList
 private val p : Joueur = Joueur()
 private var ennemy : Ennemy = Ennemy()
 private val console = Scanner(System.`in`)
+val scanner = Scanner(System.`in`)
 fun main(args: Array<String>) {
     println("Jeu avec les design pattern !")
     println("1 - Combattre")
@@ -16,7 +17,6 @@ fun main(args: Array<String>) {
 
 fun combat(){
     ennemy = Ennemy()
-    val scanner = Scanner(System.`in`)
     while (ennemy.getPv() > 0 && p.getPv() > 0 ){
         var error = true
         while (error) {
