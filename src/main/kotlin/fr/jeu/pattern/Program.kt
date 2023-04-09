@@ -4,6 +4,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 private val p : Joueur = Joueur()
+private val pointComp = 0
 private var ennemy : Ennemy = Ennemy()
 val scanner = Scanner(System.`in`)
 
@@ -15,13 +16,29 @@ fun main(args: Array<String>) {
         println("3 - Acheter compétences")
         when (scanner.nextLine()) {
             "1" -> {
-                    combat()
+                combat()
+                if(p.getPv() > 0){
+                    println("\n--------------------------------------------------")
+                    System.out.println("Vous avez gagné")
+                    println("--------------------------------------------------\n")
+                } else {
+                    println("\n--------------------------------------------------")
+                    System.out.println("Vous avez perdu")
+                    println("--------------------------------------------------\n")
+                }
             }
             "2" -> {
                 //TODO
+                /**
+                 * Afficher toutes ses stats
+                 */
             }
             "3" -> {
                 //TODO
+                /**
+                 * Utiliser pointComp pour ajouté des stats ex +dePv,atq,def
+                 * Et après mettre en place des effets de compétences
+                 */
             }
         }
     } while (true)
@@ -67,15 +84,6 @@ fun combat(){
                 }
             }
         } while (error)
-    }
-    if(p.getPv() > 0){
-        println("\n--------------------------------------------------")
-        System.out.println("Vous avez gagné")
-        println("--------------------------------------------------\n")
-    } else {
-        println("\n--------------------------------------------------")
-        System.out.println("Vous avez perdu")
-        println("--------------------------------------------------\n")
     }
 }
 
