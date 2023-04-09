@@ -36,17 +36,21 @@ open class Ennemy() : stats{
         nbBalleRecharge = 1
     }
 
-    fun lvlUp(boolSpe : Boolean){
-        if (boolSpe){
+    fun lvlUp(){
+        lvl++
+        if (lvl % 5 == 0){
             when ((0..2).random()) {
-                3 ->{
+                0 ->{
                     limiteTourDef++
+                    System.out.println("L'ennemi à plus de tours de défense")
                 }
-                4 ->{
+                1 ->{
                     nbBalleMax++
+                    System.out.println("L'ennemi à un plus grand chargeur")
                 }
-                5 ->{
+                2 ->{
                     nbBalleRecharge++
+                    System.out.println("L'ennemi recharge plus de balle par tour")
                 }
             }
         } else {
@@ -54,16 +58,19 @@ open class Ennemy() : stats{
                 0 -> {
                     degatMin++
                     degatMax += 3
+                    System.out.println("L'ennemi inflige plus de dégats")
                 }
 
                 1 -> {
                     pvMax += 3
                     def++
+                    System.out.println("L'ennemi à plus de vie et de défense")
                 }
 
                 2 -> {
                     crittique += 0.01
                     dodge += 0.01
+                    System.out.println("L'ennemi à plus de chance d'esquive et de chance de crittique")
                 }
             }
         }
