@@ -132,8 +132,10 @@ class Joueur() : stats{
     }
 
     override fun getStatsCombat() {
-        System.out.println("\nJoueur")
         System.out.println("PV : "+pv+" / "+pvMax)
+        System.out.println("Defense "+def)
+        System.out.println("Attaque "+degatMin+" / "+degatMax)
+        System.out.println("Attaque critique "+crittique)
         System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
         System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef+"\n")
     }

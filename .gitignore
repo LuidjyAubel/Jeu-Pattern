@@ -1,3 +1,5 @@
 .idea/
 target/classes/*
 target/generated-sources/*
+/bin/
+/target/
