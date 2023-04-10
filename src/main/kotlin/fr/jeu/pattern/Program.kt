@@ -16,9 +16,9 @@ fun main(args: Array<String>) {
     competences.add(c1)
     competences.add(c2)
     competences.add(c3)
+    clear()
     do {
-        println("Jeu avec les design pattern !")
-        println("1 - Combattre")
+        println("\n1 - Combattre")
         println("2 - Voir ses stats")
         println("3 - Acheter compétences")
         when (scanner.nextLine()) {
@@ -28,10 +28,13 @@ fun main(args: Array<String>) {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez gagné")
                     println("--------------------------------------------------\n")
+                    ennemy.lvlUp()
                 } else {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez perdu")
                     println("--------------------------------------------------\n")
+                    ennemy.setLevelBase()
+                    p.setPv(p.getPv())
                 }
             }
             "2" -> {
@@ -92,6 +95,7 @@ fun main(args: Array<String>) {
 
 fun combat(){
     ennemy = Ennemy()
+    clear()
     while (ennemy.getPv() > 0 && p.getPv() > 0 ){
         var error = false
         do {
@@ -134,7 +138,7 @@ fun combat(){
 }
 
 fun clear() {
-    println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
+    println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n")
 }
 
 fun atqJoueur(): Boolean {
