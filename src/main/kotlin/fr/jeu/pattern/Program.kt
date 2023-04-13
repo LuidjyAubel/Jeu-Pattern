@@ -51,7 +51,8 @@ fun main(args: Array<String>) {
                         println(x.getId()+" "+x.getNom()+" "+x.getDesc()+" "+x.getCout()+" "+x.getAcheter())
                     }
                 println("Entrez le numéro de la compétence à acheter : ")
-                when (scanner.nextLine()) {
+                val rep = scanner.nextLine()
+                when (rep) {
                     "1" -> {
                             if (competences[0].getAcheter()){
                              println("Vous avez déjà acheté  cette compétence !")
