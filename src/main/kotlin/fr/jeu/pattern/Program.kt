@@ -21,13 +21,13 @@ fun main(args: Array<String>) {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez gagné")
                     println("--------------------------------------------------\n")
-                    ennemy.lvlUp()
+                    ennemy = ennemyDecorator(ennemy)
                     p.addLvl(ennemy.getLvl() * (1+ ennemy.getLvl()/10))
                 } else {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez perdu")
                     println("--------------------------------------------------\n")
-                    ennemy.setLevelBase()
+                    ennemy = Ennemy()
                     p.setPv(p.getPvMax().toDouble())
                 }
             }
