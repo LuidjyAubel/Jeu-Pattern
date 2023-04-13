@@ -84,6 +84,8 @@ fun combat(){
             }
         } while (error)
     }
+    p.setNbBalleMax(0)
+    p.setNbTourDef(0)
 }
 
 fun clear() {
