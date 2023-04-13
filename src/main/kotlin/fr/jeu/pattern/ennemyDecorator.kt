@@ -20,6 +20,10 @@ package fr.jeu.pattern
      fun lvlUp(){
          addLvl(1)
          if (getLvl() % 5 == 0){
+             setPvMax(getPvMax()*2)
+             setDef(getDef()*2)
+             setDegatMin(getDegatMin()*2)
+             setNbBalle(getNbBalleMax())
              changeEtatBoss()
              when ((0..2).random()) {
                  0 ->{
