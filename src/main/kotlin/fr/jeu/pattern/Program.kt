@@ -84,7 +84,7 @@ fun combat(){
             }
         } while (error)
     }
-    p.setNbBalleMax(0)
+    p.setNbBalle(0)
     p.setNbTourDef(0)
 }
 
@@ -116,10 +116,12 @@ fun atqJoueur(): Boolean {
             if((p.getCrittique()*100) >= (0..100).random()){
                 println("\nCoup crittique !!!\n")
                 degat = (degat * p.getDegatCrittique())
-                degat = degat - ennemy.getDef()
             }
+            degat = degat - ennemy.getDef()
             if(degat > 0){
                 ennemy.setPv(ennemy.getPv() - degat)
+            } else {
+                degat = 0.0
             }
             println("\nDégats infligé : "+degat+" !!!\n")
         }
@@ -205,10 +207,12 @@ fun atqEnnemy(boolDefJoueur:Boolean): Boolean {
             if((ennemy.getCrittique()*100) >= (0..100).random()){
                 println("\nCoup crittique !!!\n")
                 degat = (degat * ennemy.getDegatCrittique())
-                degat = degat - p.getDef()
             }
+            degat = degat - p.getDef()
             if(degat > 0){
                 p.setPv(p.getPv() - degat)
+            } else {
+                degat = 0.0
             }
             println("\nDégats infligé : "+degat+" !!!\n")
         }
