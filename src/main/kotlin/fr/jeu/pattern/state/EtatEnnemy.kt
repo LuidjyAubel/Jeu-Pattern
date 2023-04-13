@@ -1,4 +1,4 @@
-package fr.jeu.pattern
+package fr.jeu.pattern.state
 
 // patern state
 interface etatEnnemy {

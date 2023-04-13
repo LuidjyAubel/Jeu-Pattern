@@ -1,6 +1,8 @@
-package fr.jeu.pattern
+package fr.jeu.pattern.entity
 
-class Joueur() : stats{
+import fr.jeu.pattern.stats
+
+class Joueur() : stats {
     /**
      * Stats par défaut joueur
      */

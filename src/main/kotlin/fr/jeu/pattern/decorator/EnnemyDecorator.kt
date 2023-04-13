@@ -1,7 +1,10 @@
-package fr.jeu.pattern
- class ennemyDecorator(val ennemy : Ennemy) : Ennemy() {
+package fr.jeu.pattern.decorator
+
+import fr.jeu.pattern.entity.Ennemy
+
+class ennemyDecorator(val ennemy : Ennemy) : Ennemy() {
      init {
-         addLvl(ennemy.getLvl())
+         setLvl(ennemy.getLvl())
          setDegatMin(ennemy.getDegatMin())
          setDegatMax(ennemy.getDegatMax())
          setCrittique(ennemy.getCrittique())

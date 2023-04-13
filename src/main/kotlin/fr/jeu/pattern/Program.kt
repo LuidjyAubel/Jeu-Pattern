@@ -1,5 +1,8 @@
 package fr.jeu.pattern
 
+import fr.jeu.pattern.decorator.ennemyDecorator
+import fr.jeu.pattern.entity.Ennemy
+import fr.jeu.pattern.entity.Joueur
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList

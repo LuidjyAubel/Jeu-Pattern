@@ -1,10 +1,15 @@
-package fr.jeu.pattern
+package fr.jeu.pattern.entity
 
-open class Ennemy() : stats{
+import fr.jeu.pattern.etatDeBoss
+import fr.jeu.pattern.state.etatEnnemy
+import fr.jeu.pattern.state.etatNormal
+import fr.jeu.pattern.stats
+
+open class Ennemy() : stats {
     /**
      * Stats par défaut ennemi
      */
-    private var lvl : Int = 0
+    private var lvl : Int = 1
     private var degatMin : Int = 1
     private var degatMax : Int = 0
     private var crittique : Double = 0.01
@@ -29,6 +34,10 @@ open class Ennemy() : stats{
 
     override fun addLvl(x:Int){
         lvl += x
+    }
+
+    fun setLvl(x:Int){
+        lvl = x
     }
 
     override fun setDegatMin(x: Int) {
