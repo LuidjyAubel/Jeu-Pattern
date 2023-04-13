@@ -134,12 +134,8 @@ open class Ennemy() : stats{
     override fun getNbBalleRecharge(): Int {
         return nbBalleRecharge
     }
-
     override fun getStatsCombat() {
-        System.out.println("\nEnnemy")
-        System.out.println("PV : "+pv+" / "+pvMax)
-        System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
-        System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef+"\n")
+        etat.getStatsCombat()
     }
     fun changeEtatBoss(){
         etat = etatEnBoss

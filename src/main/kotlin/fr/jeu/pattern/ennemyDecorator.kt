@@ -23,7 +23,6 @@ package fr.jeu.pattern
              setPvMax(getPvMax()*2)
              setDef(getDef()*2)
              setDegatMin(getDegatMin()*2)
-             setNbBalle(getNbBalleMax())
              changeEtatBoss()
              when ((0..2).random()) {
                  0 ->{
@@ -39,6 +38,7 @@ package fr.jeu.pattern
                      System.out.println("L'ennemi recharge plus de balle par tour")
                  }
              }
+             setNbBalle(getNbBalleMax())
          } else {
              changeEtatNormal()
              when ((0..2).random()) {
