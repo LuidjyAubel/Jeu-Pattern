@@ -41,7 +41,7 @@ open class Ennemy() : stats{
     }
 
     fun lvlUp(){
-        lvl++
+        addLvl(1)
         if (lvl % 5 == 0){
             when ((0..2).random()) {
                 0 ->{
@@ -86,8 +86,8 @@ open class Ennemy() : stats{
         return lvl
     }
 
-    override fun setLvl(x:Int){
-        lvl = x
+    override fun addLvl(x:Int){
+        lvl += x
     }
 
     override fun setDegatMin(x: Int) {
@@ -212,5 +212,19 @@ open class Ennemy() : stats{
     }
     fun changeEtatNormal(){
         etat = etatEnBoss;
+    }
+    override fun getStats() {
+        System.out.println("\nEnnemi")
+        System.out.println("LVL: "+lvl)
+        System.out.println("PV max: "+pvMax)
+        System.out.println("DEF: "+def)
+        System.out.println("Dégats min: "+degatMin)
+        System.out.println("Dégats max: "+(degatMin+degatMax))
+        System.out.println("Chance critique: "+crittique)
+        System.out.println("Multiplicateur critique: "+degatCrittique)
+        System.out.println("Chance d'esquive: "+dodge)
+        System.out.println("Nombre de balle: "+nbBalleMax)
+        System.out.println("Balle rechargé par tour: "+nbBalleRecharge)
+        System.out.println("Limite tour de def "+limiteTourDef+"\n")
     }
 }

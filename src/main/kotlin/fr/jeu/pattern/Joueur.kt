@@ -23,8 +23,12 @@ class Joueur() : stats{
        return lvl
     }
 
-    override fun setLvl(x:Int){
-        lvl = x
+    override fun addLvl(x:Int){
+        lvl += x
+    }
+
+    fun delLvl(x:Int){
+        lvl -= x
     }
 
     override fun setDegatMin(x: Int) {
@@ -132,11 +136,24 @@ class Joueur() : stats{
     }
 
     override fun getStatsCombat() {
+        System.out.println("\nJoueur")
         System.out.println("PV : "+pv+" / "+pvMax)
-        System.out.println("Defense "+def)
-        System.out.println("Attaque "+degatMin+" / "+degatMax)
-        System.out.println("Attaque critique "+crittique)
         System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
         System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef+"\n")
+    }
+
+    override fun getStats() {
+        System.out.println("\nJoueur")
+        System.out.println("Points de compétences: "+lvl)
+        System.out.println("PV : "+pv+" / "+pvMax)
+        System.out.println("DEF: "+def)
+        System.out.println("Dégats min: "+degatMin)
+        System.out.println("Dégats max: "+(degatMin+degatMax))
+        System.out.println("Chance critique: "+crittique)
+        System.out.println("Multiplicateur critique: "+degatCrittique)
+        System.out.println("Chance d'esquive: "+dodge)
+        System.out.println("Nombre de balle: "+nbBalleMax)
+        System.out.println("Balle rechargé par tour: "+nbBalleRecharge)
+        System.out.println("Limite tour de def "+limiteTourDef+"\n")
     }
 }

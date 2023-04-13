@@ -1,26 +1,19 @@
 package fr.jeu.pattern
 
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
 private val p : Joueur = Joueur()
-private val pointComp = 0
 private var ennemy : Ennemy = Ennemy()
-private var competences : ArrayList<Competence> = ArrayList<Competence>()
 val scanner = Scanner(System.`in`)
 
 fun main(args: Array<String>) {
-    var c1 : Competence = Competence("1","Plus de PV","Donne plus de PV aux personnages",1.00)
-    var c2 : Competence = Competence("2","Plus de Défense","Donne plus de Défence aux perdonnages",2.00)
-    var c3 : Competence = Competence("3","Plus d'attaque","Donne plus d'attaque aux perdonnages",1.00)
-    competences.add(c1)
-    competences.add(c2)
-    competences.add(c3)
     clear()
     do {
         println("\n1 - Combattre")
         println("2 - Voir ses stats")
-        println("3 - Acheter compétences")
+        println("3 - Acheter compétences (points dispo: "+ p.getLvl()+")")
         when (scanner.nextLine()) {
             "1" -> {
                 combat()
@@ -29,73 +22,28 @@ fun main(args: Array<String>) {
                     System.out.println("Vous avez gagné")
                     println("--------------------------------------------------\n")
                     ennemy.lvlUp()
+                    p.addLvl(ennemy.getLvl() * (1+ ennemy.getLvl()/10))
                 } else {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez perdu")
                     println("--------------------------------------------------\n")
                     ennemy.setLevelBase()
-                    p.setPv(p.getPv())
+                    p.setPv(p.getPvMax().toDouble())
                 }
             }
             "2" -> {
-                    println("\n--------------------------------------------------")
-                    System.out.println("Stats du joueur")
-                    println("--------------------------------------------------\n")
-                    p.getStatsCombat()
+                clear()
+                ennemy.getStats()
+                p.getStats()
             }
             "3" -> {
-                    println("\n--------------------------------------------------")
-                    System.out.println("Acheter compétences")
-                    println("--------------------------------------------------\n")
-                    for(x in competences){
-                        println(x.getId()+" "+x.getNom()+" "+x.getDesc()+" "+x.getCout()+" "+x.getAcheter())
-                    }
-                println("Entrez le numéro de la compétence à acheter : ")
-                val rep = scanner.nextLine()
-                when (rep) {
-                    "1" -> {
-                            if (competences[0].getAcheter()){
-                             println("Vous avez déjà acheté  cette compétence !")
-                            }
-                            if(competences[0].getCout() <= pointComp){
-                                competences[0].setAcheter()
-                                p.setPv(p.getPv()+1.00)
-                                println("Vous avez acheté la compétence "+ competences[0].getNom())
-                            }
-                    }
-                    "2" -> {
-                        if (competences[1].getAcheter()){
-                            println("Vous avez déjà acheté  cette compétence !")
-                        }
-                        if(competences[1].getCout() <= pointComp){
-                            competences[1].setAcheter()
-                            p.setDef(p.getDef()+1)
-                            println("Vous avez acheté la compétence "+ competences[1].getNom())
-                        }
-                    }
-                    "3" -> {
-                        if (competences[2].getAcheter()){
-                            println("Vous avez déjà acheté  cette compétence !")
-                        }
-                        if(competences[2].getCout() <= pointComp){
-                            competences[2].setAcheter()
-                            p.setDegatMin(p.getDegatMin() + 1)
-                            p.setDegatMax(p.getDegatMax()+ 1)
-                            println("Vous avez acheté la compétence "+ competences[0].getNom())
-                        }
-                    }
-                }
-                /**
-                 * Utiliser pointComp pour ajouté des stats ex +dePv,atq,def
-                 * Et après mettre en place des effets de compétences
-                 */
+                magasin()
             }
         }
     } while (true)
 }
 
 fun combat(){
-    ennemy = Ennemy()
     clear()
     while (ennemy.getPv() > 0 && p.getPv() > 0 ){
         var error = false
@@ -295,5 +243,237 @@ fun defEnnemy(): Boolean {
     }
     ennemy.setNbTourDef(ennemy.getNbTourDef()+1)
     return error
+}
+
+fun magasin() {
+    println("Entrez le numéro de la compétence à acheter : ")
+    println("1--> 1 PV 1 point")
+    println("2--> 1 DEF 3 point")
+    println("3--> 1 ATQ min 3 point")
+    println("4--> ATQ max 1 point")
+    println("5--> +0.5 Chance critique 5 point (limite 100%)")
+    println("6--> +0.01 Multiplicateur critique 2 point ")
+    println("7--> +0.5% Chance d'esquive 10 point (limite 90%)")
+    println("8--> Nombre de balle 25 point (limite 20)")
+    println("9--> Plus de balle rechargé par tour 15 point")
+    println("10--> Limite tour de def 25 point (limite 5)")
+    println("11--> Se soigner de 25% de sa vie max 5 points")
+    println("12--> Se soigner de 25 pv 1 points")
+    when (scanner.nextLine()) {
+        "1" -> {
+            println("Quantité ?")
+            try {
+                var cout = 1
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setPvMax(p.getPvMax() + q)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "2" -> {
+            println("Quantité ?")
+            try {
+                var cout = 3
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setDef(p.getDef() + q)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "3" -> {
+            println("Quantité ?")
+            try {
+                var cout = 3
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setDegatMin(p.getDegatMin() + q)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "4" -> {
+            println("Quantité ?")
+            try {
+                var cout = 1
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setDegatMax(p.getDegatMax() + q)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "5" -> {
+            println("Quantité ?")
+            try {
+                var cout = 5
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl() || p.getCrittique() + 0.005 * q > 1.0) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setCrittique(p.getCrittique() + q * 0.005)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "6" -> {
+            println("Quantité ?")
+            try {
+                var cout = 2
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setDegatCrittique(p.getDegatCrittique() + q * 0.01)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "7" -> {
+            println("Quantité ?")
+            try {
+                var cout = 10
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl() || p.getCrittique() + 0.005 * q > 0.9) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setDodge(p.getDodge() + q * 0.005)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "8" -> {
+            println("Quantité ?")
+            try {
+                var cout = 25
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl() || p.getNbBalleMax() + q > 20) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setNbBalleMax(p.getNbBalleMax() + q)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "9" -> {
+            println("Quantité ?")
+            try {
+                var cout = 15
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setNbBalleRecharge(p.getNbBalleRecharge() + q)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "10" -> {
+            println("Quantité ?")
+            try {
+                var cout = 25
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl() || p.getLimiteTourDef() + q > 5) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    p.setLimiteTourDef(p.getLimiteTourDef() + q)
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "11" -> {
+            println("Quantité ?")
+            try {
+                var cout = 5
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    var regen = (p.getPvMax().toDouble() / 4) * q
+                    if (regen + p.getPv() > p.getPvMax()) {
+                        p.setPv(p.getPvMax().toDouble())
+                    } else {
+                        p.setPv(p.getPv() + regen)
+                    }
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+
+        "12" -> {
+            println("Quantité ?")
+            try {
+                var cout = 1
+                var q = scanner.nextLine().toInt()
+                if ((q * cout) > p.getLvl()) {
+                    println("Pas assez de points disponible")
+                } else {
+                    p.delLvl(q * cout)
+                    var regen = 5 * q
+                    if (regen + p.getPv() > p.getPvMax()) {
+                        p.setPv(p.getPvMax().toDouble())
+                    } else {
+                        p.setPv(p.getPv() + regen)
+                    }
+                    println("Achat validé")
+                }
+            } catch (e: Exception) {
+                println("Achat annulé")
+            }
+        }
+    }
+
 }
 

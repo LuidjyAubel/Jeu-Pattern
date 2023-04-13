@@ -5,7 +5,7 @@ interface stats {
      * Le niveau actuel
      * @return lvl
      */
-    fun setLvl(x:Int)
+    fun addLvl(x:Int)
     fun getLvl(): Int
     /**
      * Degat min lorsque qu'un coup est infligé
@@ -104,4 +104,8 @@ interface stats {
      * @return stats
      */
     fun getStatsCombat()
+    /**
+     * Affiche toutes les stats
+     */
+    fun getStats()
 }
