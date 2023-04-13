@@ -9,4 +9,8 @@ class etatNormal(ennemy: Ennemy) : etatEnnemy{
         System.out.println("Limite tour de def "+en.getNbTourDef()+" / "+en.getLimiteTourDef()+"\n")
     }
 
+    override fun getBoolBoss(): Boolean {
+        return false
+    }
+
 }

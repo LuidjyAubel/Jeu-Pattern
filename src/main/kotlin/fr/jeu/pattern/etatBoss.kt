@@ -8,4 +8,8 @@ class etatDeBoss(ennemy: Ennemy) : etatEnnemy{
         System.out.println("Balle "+en.getNbBalle()+" / "+en.getNbBalleMax())
         System.out.println("Limite tour de def "+en.getNbTourDef()+" / "+en.getLimiteTourDef()+"\n")
     }
+
+    override fun getBoolBoss(): Boolean {
+        return true
+    }
 }

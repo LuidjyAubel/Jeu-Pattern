@@ -137,6 +137,9 @@ open class Ennemy() : stats{
     override fun getStatsCombat() {
         etat.getStatsCombat()
     }
+    fun getBoolBoss(): Boolean{
+        return etat.getBoolBoss()
+    }
     fun changeEtatBoss(){
         etat = etatEnBoss
     }

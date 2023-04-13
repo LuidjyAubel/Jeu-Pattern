@@ -21,8 +21,12 @@ fun main(args: Array<String>) {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez gagné")
                     println("--------------------------------------------------\n")
+                    var pointGagner = ennemy.getLvl() * (1+ ennemy.getLvl() / 10)
+                    if (ennemy.getBoolBoss()){
+                      pointGagner *= 2
+                    }
+                    p.addLvl(pointGagner)
                     ennemy = ennemyDecorator(ennemy)
-                    p.addLvl(ennemy.getLvl() * (1+ ennemy.getLvl()/10))
                 } else {
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez perdu")
