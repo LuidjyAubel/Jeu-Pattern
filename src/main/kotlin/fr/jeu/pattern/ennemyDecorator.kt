@@ -20,6 +20,7 @@ package fr.jeu.pattern
      fun lvlUp(){
          addLvl(1)
          if (getLvl() % 5 == 0){
+             changeEtatBoss()
              when ((0..2).random()) {
                  0 ->{
                      setLimiteTourDef(getLimiteTourDef()+1)
@@ -35,6 +36,7 @@ package fr.jeu.pattern
                  }
              }
          } else {
+             changeEtatNormal()
              when ((0..2).random()) {
                  0 -> {
                      setDegatMin(getDegatMin()+1)
