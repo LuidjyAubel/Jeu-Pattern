@@ -1,15 +1,16 @@
 package fr.jeu.pattern
 
 class etatDeBoss(ennemy: Ennemy) : etatEnnemy{
-    private  var en : Ennemy = ennemy;
-    override fun Normal(){
-        en.setDegatMin(1)
-        en.setDegatMax(0)
-        en.setDegatCrittique(0.01)
-        en.setPv(3.00)
-        en.changeEtatNormal()
+    private var en : Ennemy = ennemy
+    override fun getPvMax() {
+        en.getPvMax()*2
     }
-    override fun Boss(){
-        println("Je suis déjà un boss")
+
+    override fun getDef() {
+        en.getDef()*2
+    }
+
+    override fun getDegatMin() {
+        en.getDegatMin()*2
     }
 }

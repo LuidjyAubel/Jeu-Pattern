@@ -141,18 +141,11 @@ open class Ennemy() : stats{
         System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
         System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef+"\n")
     }
-    // changement d'état de l'ennemi
-    fun etatNormal(){
-        etat.Normal();
-    }
-    fun etatBoss(ennemy: Ennemy) {
-        etat.Boss();
-    }
     fun changeEtatBoss(){
-        etat = etatEnNormal;
+        etat = etatEnBoss
     }
     fun changeEtatNormal(){
-        etat = etatEnBoss;
+        etat = etatEnNormal
     }
     override fun getStats() {
         System.out.println("\nEnnemi")

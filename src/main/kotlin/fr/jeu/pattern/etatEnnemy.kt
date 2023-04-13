@@ -2,6 +2,7 @@ package fr.jeu.pattern
 
 // patern state
 interface etatEnnemy {
-    fun Normal()
-    fun Boss()
+    fun getPvMax()
+    fun getDef()
+    fun getDegatMin()
 }
