@@ -2,20 +2,17 @@
 
 -----------------------------------
 
-## Idée pattern :
- - factory
- - decorator
+## Pattern :
  - state
+ - décorator
 
 ## Classe :
 - Joueur (le personage incarné par le joueur)
 - Ennemy (les différents énnemis du jeu)
 - Competence (les compentences disponnible pour le joueur)
+- etatNormal (classe de l'état normal Pattern State)
+- etatBoss (classe de l'état boss Pattern State)
 
-## A ajouté :
-- Système d'arme (rechargement de l'arme, ect...)
-- Interface console (Pour pouvoir jouer)
-- des Boss (sont des ennemis spéciaux)
-- Le monde (plateau de jeu) (matrice représentant le terrain ?)
-- Magasin de compétence
-- ...
+## Interface :
+- etatEnnemy (interface du pattern state)
+- stats (défini les méthodes utilise pour les stats du joueur et des ennemis)

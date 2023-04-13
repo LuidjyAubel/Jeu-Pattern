@@ -19,6 +19,10 @@ open class Ennemy() : stats{
     private var nbBalleMax : Int = 2
     private var nbBalleRecharge : Int = 1
 
+    private var etatEnNormal = etatNormal(this);
+    private var etatEnBoss = etatDeBoss(this);
+    private var etat : etatEnnemy = etatEnNormal;
+
     fun setLevelBase(){
         lvl = 0
         degatMin = 1
@@ -195,5 +199,18 @@ open class Ennemy() : stats{
         System.out.println("PV : "+pv+" / "+pvMax)
         System.out.println("Balle "+nbBalle+" / "+nbBalleMax)
         System.out.println("Limite tour de def "+nbTourDef+" / "+limiteTourDef+"\n")
+    }
+    // changement d'état de l'ennemi
+    fun etatNormal(){
+        etat.Normal();
+    }
+    fun etatBoss(ennemy: Ennemy) {
+        etat.Boss();
+    }
+    fun changeEtatBoss(){
+        etat = etatEnNormal;
+    }
+    fun changeEtatNormal(){
+        etat = etatEnBoss;
     }
 }
