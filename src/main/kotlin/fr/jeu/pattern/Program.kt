@@ -467,7 +467,7 @@ fun magasin() {
                     println("Pas assez de points disponible")
                 } else {
                     p.delLvl(q * cout)
-                    var regen = 5 * q
+                    var regen = 25 * q
                     if (regen + p.getPv() > p.getPvMax()) {
                         p.setPv(p.getPvMax().toDouble())
                     } else {
