@@ -1,6 +1,6 @@
 package fr.jeu.pattern
 
-import fr.jeu.pattern.actionJoueur.combat
+import fr.jeu.pattern.actionJoueur.comportement.combat
 import fr.jeu.pattern.actionJoueur.magasin
 import fr.jeu.pattern.decorator.ennemyDecorator
 import fr.jeu.pattern.entity.Ennemy
@@ -18,9 +18,11 @@ fun main(args: Array<String>) {
         println("\n1 - Combattre")
         println("2 - Voir ses stats")
         println("3 - Acheter compétences (points dispo: "+ p.getLvl()+")")
+        println("4 - Acheter compétences à effets (points dispo: "+ p.getLvl()+")")
+
         when (scanner.nextLine()) {
             "1" -> {
-                p = combat(p, ennemy).getJoueur()
+                p.setPv(combat.startCombat(p, ennemy))
                 if(p.getPv() > 0){
                     println("\n--------------------------------------------------")
                     System.out.println("Vous avez gagné")
@@ -45,7 +47,10 @@ fun main(args: Array<String>) {
                 p.getStats()
             }
             "3" -> {
-                p = magasin(p).getJoueur()
+                p.setLvl(magasin.startMagasin(p))
+            }
+            "4" -> {
+                p.setLvl(magasin.startMagasinEffets(p))
             }
         }
     } while (true)

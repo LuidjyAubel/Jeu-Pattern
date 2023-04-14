@@ -59,7 +59,6 @@ class ennemyDecorator(val ennemy : Ennemy) : Ennemy() {
 
                  2 -> {
                      setDegatMin(getDegatMin()+1)
-                     setDef(getDef()+1)
                      setPvMax(getPvMax()+1)
                      setCrittique(getCrittique()+0.01)
                      setDodge(getDodge()+0.01)
