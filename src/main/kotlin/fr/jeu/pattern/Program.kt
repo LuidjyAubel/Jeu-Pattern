@@ -346,8 +346,10 @@ fun magasin() {
             try {
                 var cout = 5
                 var q = scanner.nextLine().toInt()
-                if ((q * cout) > p.getLvl() || p.getCrittique() + 0.005 * q > 1.0) {
+                if ((q * cout) > p.getLvl()) {
                     println("Pas assez de points disponible")
+                } else if (p.getCrittique() + 0.005 * q > 1.0){
+                    println("La limite à été atteinte, achat annulé !")
                 } else {
                     p.delLvl(q * cout)
                     p.setCrittique(p.getCrittique() + q * 0.005)
@@ -380,8 +382,10 @@ fun magasin() {
             try {
                 var cout = 10
                 var q = scanner.nextLine().toInt()
-                if ((q * cout) > p.getLvl() || p.getCrittique() + 0.005 * q > 0.9) {
+                if ((q * cout) > p.getLvl()) {
                     println("Pas assez de points disponible")
+                } else if (p.getDodge() + 0.005 * q > 0.9){
+                    println("La limite à été atteinte, achat annulé !")
                 } else {
                     p.delLvl(q * cout)
                     p.setDodge(p.getDodge() + q * 0.005)
@@ -397,8 +401,10 @@ fun magasin() {
             try {
                 var cout = 25
                 var q = scanner.nextLine().toInt()
-                if ((q * cout) > p.getLvl() || p.getNbBalleMax() + q > 20) {
+                if ((q * cout) > p.getLvl()) {
                     println("Pas assez de points disponible")
+                } else if ( p.getNbBalleMax() + q > 20){
+                    println("La limite à été atteinte, achat annulé !")
                 } else {
                     p.delLvl(q * cout)
                     p.setNbBalleMax(p.getNbBalleMax() + q)
@@ -431,8 +437,10 @@ fun magasin() {
             try {
                 var cout = 25
                 var q = scanner.nextLine().toInt()
-                if ((q * cout) > p.getLvl() || p.getLimiteTourDef() + q > 5) {
+                if ((q * cout) > p.getLvl()) {
                     println("Pas assez de points disponible")
+                } else if (p.getLimiteTourDef() + q > 5){
+                    println("La limite à été atteinte, achat annulé !")
                 } else {
                     p.delLvl(q * cout)
                     p.setLimiteTourDef(p.getLimiteTourDef() + q)
