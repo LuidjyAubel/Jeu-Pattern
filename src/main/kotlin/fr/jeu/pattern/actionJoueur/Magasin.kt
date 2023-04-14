@@ -13,6 +13,13 @@ open class magasin() {
         private var lesComp = ArrayList<Competence>()
 
         /**
+         * Retourn le tableau de compétences
+         */
+        fun getLesComp(): ArrayList<Competence>{
+            return lesComp
+        }
+
+        /**
          * Initialise le magasin effets
          */
         fun initComp(){

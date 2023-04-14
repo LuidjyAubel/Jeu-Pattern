@@ -22,3 +22,22 @@
 ## Interface :
 - etatEnnemy (interface du pattern state)
 - stats (défini les méthodes utilise pour les stats du joueur et des ennemis)
+
+## Test :
+Des test ont étaient implémenté pour les classes :
+- Competence
+- Joueur
+- Ennemy
+- Magasin
+
+## Compilation :
+
+__Nous utilisons pour la compilation et les dépendances du projet l'outil de gestion Maven de Apache__
+
+### Dépendance :
+- Junit jupiter (Pour les tests)
+
+### Commande :
+- mvn compile (pour compilé le projet)
+- mvn run (pour lancé le projet)
+- mvn test (pour lancé tout les tests)
