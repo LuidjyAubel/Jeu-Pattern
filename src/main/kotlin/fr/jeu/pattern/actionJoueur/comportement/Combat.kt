@@ -184,6 +184,9 @@ class combat {
          */
         fun getActionEnnemy(): Int {
             val actions = ArrayList<Int>()
+            if(ennemy.getNbBalle() == 0 && p.getNbBalle() == 0){
+                return 1
+            }
             if (ennemy.getNbBalle() > 0) {
                 actions.add(1)
             }
