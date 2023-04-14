@@ -4,11 +4,23 @@ import fr.jeu.pattern.actionJoueur.comportement.combat
 import fr.jeu.pattern.utility.clearCmd
 import fr.jeu.pattern.entity.Joueur
 import fr.jeu.pattern.scanner
+import fr.jeu.pattern.utility.Competence
 
 open class magasin() {
     companion object {
         private var nbAchatsEffect = 1
         private var effectBuy = ArrayList<Int>()
+        private var lesComp = ArrayList<Competence>()
+
+        /**
+         * Initialise le magasin effets
+         */
+        fun initComp(){
+            lesComp.add(Competence(1,"Récupérer 10% de pv/combat",))
+            lesComp.add(Competence(2,"Commencer avec 25% du chargeur",))
+            lesComp.add(Competence(3,"Permet de fusionner les balles pour multiplier les dégats",))
+        }
+
         /**
          * Permet au joueur d'acheter
          * @Return les points restants
@@ -262,20 +274,13 @@ open class magasin() {
             clearCmd()
             var cout = nbAchatsEffect * 25
             println("Entrez le numéro de la compétence à acheter : ")
-            println("1--> Récupérer 10% de pv/combat "+ cout +" points")
-            println("2--> Commencer avec 25% du chargeur "+ cout +" points")
-            println("3--> Permet de fusionner les balles pour multiplier les dégats "+ cout +" points")
-            println("4--> ")
-            println("5--> ")
+            lesComp.forEach {
+                if (!it.getAcheter())
+                    println("${it.getId()}--> ${it.getDesc()} "+ cout +" points")
+            }
             when (scanner.nextLine()) {
                 "1" -> {
-                    var boolAcheter = false
-                    effectBuy.forEach{
-                        if (it == 1){
-                            boolAcheter = true
-                        }
-                    }
-                    if(boolAcheter){
+                    if(lesComp.get(0).getAcheter()){
                         println("La compétence à effets à déjà été acheté!")
                     } else if (cout > p.getLvl()) {
                         println("Pas assez de points disponible")
@@ -292,18 +297,12 @@ open class magasin() {
                         }
                         println("Achat validé")
                         nbAchatsEffect++
-                        effectBuy.add(1)
+                        lesComp.get(0).setAcheter()
                     }
                 }
 
                 "2" -> {
-                    var boolAcheter = false
-                    effectBuy.forEach{
-                        if (it == 2){
-                            boolAcheter = true
-                        }
-                    }
-                    if(boolAcheter){
+                    if(lesComp.get(1).getAcheter()){
                         println("La compétence à effets à déjà été acheté!")
                     } else if (cout > p.getLvl()) {
                         println("Pas assez de points disponible")
@@ -319,39 +318,37 @@ open class magasin() {
                         }
                         println("Achat validé")
                         nbAchatsEffect++
-                        effectBuy.add(2)
+                        lesComp.get(1).setAcheter()
                     }
                 }
 
                 "3" -> {
-                    var boolAcheter = false
-                    effectBuy.forEach{
-                        if (it == 3){
-                            boolAcheter = true
-                        }
-                    }
-                    if(boolAcheter){
+                    if(lesComp.get(2).getAcheter()){
                         println("La compétence à effets à déjà été acheté!")
                     } else if (cout > p.getLvl()) {
                         println("Pas assez de points disponible")
                     } else {
                         p.delLvl(cout)
-                        var degat = 0
                         combat.setComportementAtqSpeJoueur {
-                            if (p.getNbBalle() > 1) {
-                                println("Combien de balle voulez vous tirer?")
+                            if(p.getNbBalle()>1) {
+                                println("Combiens de balles voulez vous tirer? (balles dispo : ${p.getNbBalle()}")
                                 try {
                                     var q = scanner.nextLine().toInt()
-                                    degat = degat * q
-                                    println("$q balle à été tiré")
+                                    if (q <= p.getNbBalle()){
+                                        combat.setDegatJ(combat.getDegatJ() * q)
+                                        println("$q balle ont été tiré")
+                                    } else {
+                                        println("1 balle à été tiré")
+                                    }
                                 } catch (e: Exception) {
                                     println("1 balle à été tiré")
                                 }
                             }
+                            combat.getComportementAtqSpeJoueur()
                         }
                         println("Achat validé")
                         nbAchatsEffect++
-                        effectBuy.add(3)
+                        lesComp.get(2).setAcheter()
                     }
                 }
 

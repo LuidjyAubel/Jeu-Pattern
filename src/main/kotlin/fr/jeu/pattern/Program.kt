@@ -13,6 +13,7 @@ private var ennemy : Ennemy = Ennemy()
 val scanner = Scanner(System.`in`)
 
 fun main(args: Array<String>) {
+    magasin.initComp()
     clearCmd()
     do {
         println("\n1 - Combattre")

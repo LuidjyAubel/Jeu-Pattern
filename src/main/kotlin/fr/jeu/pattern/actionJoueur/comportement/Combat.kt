@@ -11,6 +11,7 @@ class combat {
 
         private lateinit var p : Joueur
         private lateinit var ennemy : Ennemy
+        private var degatJ = 0.0
         private var comportementFinCombat: () -> Unit = {
             p.setNbBalle(0)
             p.setNbTourDef(0)
@@ -74,6 +75,20 @@ class combat {
         }
 
         /**
+         * set degatJ
+         */
+        fun setDegatJ(x:Double){
+            degatJ = x
+        }
+
+        /**
+         * get degatJ
+         */
+        fun getDegatJ(): Double {
+            return degatJ
+        }
+
+        /**
          * Set le comportement fin combat
          */
         fun setComportementFinCombat(leComportement: () -> Unit){
@@ -123,7 +138,6 @@ class combat {
                 error = true
             } else {
                 p.setNbTourDef(0)
-                p.setNbBalle(p.getNbBalle()-1)
                 val action = getActionEnnemy()
                 when (action) {
                     1 -> {
@@ -137,28 +151,29 @@ class combat {
                     }
                 }
                 if (action != 3){
-                    var degat : Double = p.getDegatMin()+(0..p.getDegatMax()).random().toDouble()
+                    degatJ = p.getDegatMin()+(0..p.getDegatMax()).random().toDouble()
                     var crittique = p.getCrittique()
                     var pCrittique = ((0..100).random().toDouble())/100
                     if(crittique >= pCrittique){
                         println("\nCoup crittique !!!")
-                        degat = (degat * p.getDegatCrittique())
+                        degatJ = (degatJ * p.getDegatCrittique())
                     }
-                    degat = degat - ennemy.getDef()
+                    degatJ = degatJ - ennemy.getDef()
                     var dodge = ennemy.getDodge()
                     var pDodge = ((0..100).random().toDouble())/100
                     if(dodge >= pDodge){
                         println("\nEsquive !!!")
-                        degat = 0.0
+                        degatJ = 0.0
                     }
-                    if(degat > 0){
+                    if(degatJ > 0){
                         comportementAtqSpeJoueur()
-                        ennemy.setPv(ennemy.getPv() - degat)
+                        ennemy.setPv(ennemy.getPv() - degatJ)
                     } else {
-                        degat = 0.0
+                        degatJ = 0.0
                     }
-                    println("\nDégats infligé : "+degat+" !!!\n")
+                    println("\nDégats infligé : "+degatJ+" !!!\n")
                 }
+                if (p.getNbBalle()!=0)p.setNbBalle(p.getNbBalle()-1)
             }
             return error
         }
