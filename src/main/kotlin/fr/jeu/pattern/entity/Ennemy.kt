@@ -31,12 +31,16 @@ open class Ennemy() : stats {
         return lvl
     }
 
+    override fun setLvl(x: Int) {
+        lvl = x
+    }
+
     override fun addLvl(x:Int){
         lvl += x
     }
 
-    fun setLvl(x:Int){
-        lvl = x
+    override fun delLvl(x:Int){
+        lvl -= x
     }
 
     override fun setDegatMin(x: Int) {

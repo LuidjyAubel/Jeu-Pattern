@@ -6,7 +6,9 @@ interface stats {
      * @return lvl
      */
     fun addLvl(x:Int)
+    fun delLvl(x:Int)
     fun getLvl(): Int
+    fun setLvl(x:Int)
     /**
      * Degat min lorsque qu'un coup est infligé
      * @return degatMin
