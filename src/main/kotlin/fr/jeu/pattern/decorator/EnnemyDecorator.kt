@@ -20,6 +20,10 @@ class ennemyDecorator(val ennemy : Ennemy) : Ennemy() {
          setNbBalleRecharge(ennemy.getNbBalleRecharge())
          lvlUp()
      }
+
+    /**
+     * Level up l'ennemi
+     */
      fun lvlUp(){
          addLvl(1)
          if (getLvl() % 5 == 0){

@@ -7,6 +7,8 @@ import fr.jeu.pattern.scanner
 
 open class magasin() {
     companion object {
+        private var nbAchatsEffect = 1
+        private var effectBuy = ArrayList<Int>()
         /**
          * Permet au joueur d'acheter
          * @Return les points restants
@@ -258,20 +260,28 @@ open class magasin() {
          */
         fun startMagasinEffets(p: Joueur): Int {
             clearCmd()
+            var cout = nbAchatsEffect * 25
             println("Entrez le numéro de la compétence à acheter : ")
-            println("1--> Récupérer 10% de pv/combat 50 points")
-            println("2--> Commencer avec 25% du chargeur 50 points")
-            println("3--> ")
+            println("1--> Récupérer 10% de pv/combat "+ cout +" points")
+            println("2--> Commencer avec 25% du chargeur "+ cout +" points")
+            println("3--> Permet de fusionner les balles pour multiplier les dégats "+ cout +" points")
             println("4--> ")
             println("5--> ")
             when (scanner.nextLine()) {
                 "1" -> {
-                    var cout = 50
-                    if (cout > p.getLvl()) {
+                    var boolAcheter = false
+                    effectBuy.forEach{
+                        if (it == 1){
+                            boolAcheter = true
+                        }
+                    }
+                    if(boolAcheter){
+                        println("La compétence à effets à déjà été acheté!")
+                    } else if (cout > p.getLvl()) {
                         println("Pas assez de points disponible")
                     } else {
                         p.delLvl(cout)
-                        combat.setComportementFinCombat({
+                        combat.setComportementFinCombat {
                             combat.getComportementFinCombat()
                             var regen = (p.getPvMax().toDouble() / 10)
                             if (regen + p.getPv() > p.getPvMax()) {
@@ -279,30 +289,70 @@ open class magasin() {
                             } else {
                                 p.setPv(p.getPv() + regen)
                             }
-                        })
+                        }
                         println("Achat validé")
+                        nbAchatsEffect++
+                        effectBuy.add(1)
                     }
                 }
 
                 "2" -> {
-                    var cout = 50
-                    if (cout > p.getLvl()) {
+                    var boolAcheter = false
+                    effectBuy.forEach{
+                        if (it == 2){
+                            boolAcheter = true
+                        }
+                    }
+                    if(boolAcheter){
+                        println("La compétence à effets à déjà été acheté!")
+                    } else if (cout > p.getLvl()) {
                         println("Pas assez de points disponible")
                     } else {
                         p.delLvl(cout)
-                        combat.setComportementDebutCombat({
+                        combat.setComportementDebutCombat {
                             combat.getComportementDebutCombat()
-                            var newMax : Double = (p.getNbBalleMax().toDouble()/4)
-                            if(newMax<1){
+                            var newMax: Double = (p.getNbBalleMax().toDouble() / 4)
+                            if (newMax < 1) {
                                 newMax = 1.0
                             }
                             p.setNbBalle(newMax.toInt())
-                        })
+                        }
                         println("Achat validé")
+                        nbAchatsEffect++
+                        effectBuy.add(2)
                     }
                 }
 
                 "3" -> {
+                    var boolAcheter = false
+                    effectBuy.forEach{
+                        if (it == 3){
+                            boolAcheter = true
+                        }
+                    }
+                    if(boolAcheter){
+                        println("La compétence à effets à déjà été acheté!")
+                    } else if (cout > p.getLvl()) {
+                        println("Pas assez de points disponible")
+                    } else {
+                        p.delLvl(cout)
+                        var degat = 0
+                        combat.setComportementAtqSpeJoueur {
+                            if (p.getNbBalle() > 1) {
+                                println("Combien de balle voulez vous tirer?")
+                                try {
+                                    var q = scanner.nextLine().toInt()
+                                    degat = degat * q
+                                    println("$q balle à été tiré")
+                                } catch (e: Exception) {
+                                    println("1 balle à été tiré")
+                                }
+                            }
+                        }
+                        println("Achat validé")
+                        nbAchatsEffect++
+                        effectBuy.add(3)
+                    }
                 }
 
                 "4" -> {

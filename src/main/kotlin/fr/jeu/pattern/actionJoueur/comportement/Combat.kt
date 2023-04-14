@@ -17,6 +17,8 @@ class combat {
         }
         private var comportementDebutCombat: () -> Unit = {
         }
+        private var comportementAtqSpeJoueur: () -> Unit = {
+        }
 
 
         /**
@@ -24,7 +26,7 @@ class combat {
          * @return les pv restants
          */
         fun startCombat(leP:Joueur, Lennemy: Ennemy): Double {
-            debutCombat()
+            comportementDebutCombat()
             p = leP
             ennemy = Lennemy
             clearCmd()
@@ -67,30 +69,48 @@ class combat {
                     }
                 } while (error)
             }
-            finCombat()
+            comportementFinCombat()
             return p.getPv()
         }
 
-        fun finCombat(){
-            comportementFinCombat()
-        }
-
+        /**
+         * Set le comportement fin combat
+         */
         fun setComportementFinCombat(leComportement: () -> Unit){
             comportementFinCombat = leComportement
         }
 
+        /**
+         * @return le comportement fin combat
+         */
         fun getComportementFinCombat(): () -> Unit {
             return comportementFinCombat
         }
 
-        fun debutCombat(){
-            comportementDebutCombat()
+        /**
+         * Set le comportement fin combat
+         */
+        fun setComportementAtqSpeJoueur(leComportement: () -> Unit){
+            comportementAtqSpeJoueur = leComportement
         }
 
+        /**
+         * @return le comportement fin combat
+         */
+        fun getComportementAtqSpeJoueur(): () -> Unit {
+            return comportementAtqSpeJoueur
+        }
+
+        /**
+         * Set le comportement debut combat
+         */
         fun setComportementDebutCombat(leComportement: () -> Unit){
             comportementDebutCombat = leComportement
         }
 
+        /**
+         * @return le comportement debut combat
+         */
         fun getComportementDebutCombat(): () -> Unit {
             return comportementDebutCombat
         }
@@ -132,6 +152,7 @@ class combat {
                         degat = 0.0
                     }
                     if(degat > 0){
+                        comportementAtqSpeJoueur()
                         ennemy.setPv(ennemy.getPv() - degat)
                     } else {
                         degat = 0.0

@@ -4,7 +4,7 @@ class Joueur() : stats {
     /**
      * Stats par défaut joueur
      */
-    private var lvl : Int = 0
+    private var lvl : Int = 50
     private var degatMin : Int = 1
     private var degatMax : Int = 3
     private var crittique : Double = 0.01
