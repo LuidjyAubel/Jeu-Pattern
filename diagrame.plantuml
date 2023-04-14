@@ -1,0 +1,117 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class Competence {
+  + Competence(Int, String): 
+  + setAcheter(): Unit
+   acheter: Boolean
+   id: Int
+   desc: String
+}
+class Ennemy {
+  + Ennemy(): 
+  + delLvl(Int): Unit
+  + addLvl(Int): Unit
+  + getStats(): Unit
+  + getStatsCombat(): Unit
+  + changeEtatBoss(): Unit
+  + changeEtatNormal(): Unit
+   def: Int
+   degatMin: Int
+   boolBoss: Boolean
+   nbTourDef: Int
+   lvl: Int
+   crittique: Double
+   degatMax: Int
+   limiteTourDef: Int
+   nbBalleMax: Int
+   dodge: Double
+   nbBalle: Int
+   degatCrittique: Double
+   pvMax: Int
+   pv: Double
+   nbBalleRecharge: Int
+}
+class Joueur {
+  + Joueur(): 
+  + addLvl(Int): Unit
+  + getStatsCombat(): Unit
+  + getStats(): Unit
+  + delLvl(Int): Unit
+   def: Int
+   degatMin: Int
+   nbTourDef: Int
+   lvl: Int
+   crittique: Double
+   degatMax: Int
+   limiteTourDef: Int
+   nbBalleMax: Int
+   dodge: Double
+   nbBalle: Int
+   degatCrittique: Double
+   pvMax: Int
+   pv: Double
+   nbBalleRecharge: Int
+}
+class ProgramKt {
+  + main(String[]): Unit
+   scanner: Scanner
+}
+class clearCmd {
+  + clearCmd(): 
+}
+class combat {
+  + combat(): 
+}
+class ennemyDecorator {
+  + ennemyDecorator(Ennemy): 
+  + lvlUp(): Unit
+   ennemy: Ennemy
+}
+class etatDeBoss {
+  + etatDeBoss(Ennemy): 
+  + getStatsCombat(): Unit
+   boolBoss: Boolean
+}
+interface etatEnnemy << interface >> {
+  + getStatsCombat(): Unit
+   boolBoss: Boolean
+}
+class etatNormal {
+  + etatNormal(Ennemy): 
+  + getStatsCombat(): Unit
+   boolBoss: Boolean
+}
+class magasin {
+  + magasin(): 
+}
+interface stats << interface >> {
+  + getStatsCombat(): Unit
+  + delLvl(Int): Unit
+  + addLvl(Int): Unit
+  + getStats(): Unit
+   def: Int
+   degatMin: Int
+   nbTourDef: Int
+   lvl: Int
+   crittique: Double
+   degatMax: Int
+   limiteTourDef: Int
+   nbBalleMax: Int
+   dodge: Double
+   nbBalle: Int
+   degatCrittique: Double
+   pvMax: Int
+   pv: Double
+   nbBalleRecharge: Int
+}
+
+Ennemy           -[#008200,dashed]-^  stats           
+Joueur           -[#008200,dashed]-^  stats           
+ennemyDecorator  -[#000082,plain]-^  Ennemy          
+etatDeBoss       -[#008200,dashed]-^  etatEnnemy      
+etatNormal       -[#008200,dashed]-^  etatEnnemy      
+@enduml
