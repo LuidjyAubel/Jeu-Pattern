@@ -1,4 +1,4 @@
-package fr.jeu.pattern
+package fr.jeu.pattern.utility
 
 class Competence(unID : String, unNom : String, uneDesc : String, unCout : Double) {
     private var id : String = unID

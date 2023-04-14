@@ -1,10 +1,15 @@
-package fr.jeu.pattern
+package fr.jeu.pattern.actionJoueur
 
+import fr.jeu.pattern.utility.clearCmd
 import fr.jeu.pattern.entity.Ennemy
 import fr.jeu.pattern.entity.Joueur
+import fr.jeu.pattern.scanner
 
 class combat(var p:Joueur, var ennemy: Ennemy) {
 
+    /**
+     * Effectue le combat
+     */
     init{
         clearCmd()
         while (ennemy.getPv() > 0 && p.getPv() > 0 ){
@@ -50,10 +55,16 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
         p.setNbTourDef(0)
     }
 
+    /**
+     * Return le joueur au main
+     */
     fun getJoueur() : Joueur{
         return p
     }
 
+    /**
+     * Effectue l'action atq du joueur
+     */
     fun atqJoueur(): Boolean {
         var error = false
         if(p.getNbBalle() < 1){
@@ -75,11 +86,19 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
             }
             if (action != 3){
                 var degat : Double = p.getDegatMin()+(0..p.getDegatMax()).random().toDouble()
-                if((p.getCrittique()*100) >= (0..100).random()){
+                var crittique = p.getCrittique()
+                var pCrittique = ((0..100).random().toDouble())/100
+                if(crittique >= pCrittique){
                     println("\nCoup crittique !!!")
                     degat = (degat * p.getDegatCrittique())
                 }
                 degat = degat - ennemy.getDef()
+                var dodge = ennemy.getDodge()
+                var pDodge = ((0..100).random().toDouble())/100
+                if(dodge >= pDodge){
+                    println("\nEsquive !!!")
+                    degat = 0.0
+                }
                 if(degat > 0){
                     ennemy.setPv(ennemy.getPv() - degat)
                 } else {
@@ -91,6 +110,9 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
         return error
     }
 
+    /**
+     * Effectue l'action rech du joueur
+     */
     fun rechJoueur(): Boolean {
         var error = false
         if (p.getNbBalle() == p.getNbBalleMax()){
@@ -118,6 +140,9 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
         return error
     }
 
+    /**
+     * Effectue l'action def du joueur
+     */
     fun defJoueur(): Boolean {
         var error = false
         if (p.getLimiteTourDef() == p.getNbTourDef()){
@@ -139,6 +164,9 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
         return error
     }
 
+    /**
+     * Sélectionne l'action de l'ennemi
+     */
     fun getActionEnnemy(): Int {
         val actions = ArrayList<Int>()
         if (ennemy.getNbBalle() > 0) {
@@ -154,6 +182,9 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
         return actions.get(index)
     }
 
+    /**
+     * Effectue l'action atq de l'ennemi
+     */
     fun atqEnnemy(boolDefJoueur:Boolean): Boolean {
         println("--------------------------------------------------")
         println("L'ennemi à attaqué !")
@@ -166,11 +197,19 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
             ennemy.setNbBalle(ennemy.getNbBalle()-1)
             if (!boolDefJoueur) {
                 var degat : Double = ennemy.getDegatMin()+(0..ennemy.getDegatMax()).random().toDouble()
-                if((ennemy.getCrittique()*100) >= (0..100).random()){
+                var crittique = ennemy.getCrittique()
+                var pCrittique = ((0..100).random().toDouble())/100
+                if(crittique >= pCrittique){
                     println("\nCoup crittique !!!")
                     degat = (degat * ennemy.getDegatCrittique())
                 }
                 degat = degat - p.getDef()
+                var dodge = p.getDodge()
+                var pDodge = ((0..100).random().toDouble())/100
+                if(dodge >= pDodge){
+                    println("\nEsquive !!!")
+                    degat = 0.0
+                }
                 if(degat > 0){
                     p.setPv(p.getPv() - degat)
                 } else {
@@ -182,6 +221,9 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
         return error
     }
 
+    /**
+     * Effectue l'action rech de l'ennemi
+     */
     fun rechEnnemy(): Boolean {
         println("--------------------------------------------------")
         println("L'ennemi à rechargé !")
@@ -201,6 +243,9 @@ class combat(var p:Joueur, var ennemy: Ennemy) {
         return error
     }
 
+    /**
+     * Effectue l'action def de l'ennemi
+     */
     fun defEnnemy(): Boolean {
         println("--------------------------------------------------")
         println("L'ennemi se defend !")

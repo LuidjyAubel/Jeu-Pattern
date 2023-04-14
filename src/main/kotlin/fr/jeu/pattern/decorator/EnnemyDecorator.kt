@@ -52,15 +52,18 @@ class ennemyDecorator(val ennemy : Ennemy) : Ennemy() {
                  }
 
                  1 -> {
+                     setDef(getDef()+1)
                      setPvMax(getPvMax()+3)
-                     setDef(getDef())
                      System.out.println("L'ennemi à plus de vie et de défense")
                  }
 
                  2 -> {
+                     setDegatMin(getDegatMin()+1)
+                     setDef(getDef()+1)
+                     setPvMax(getPvMax()+1)
                      setCrittique(getCrittique()+0.01)
                      setDodge(getDodge()+0.01)
-                     System.out.println("L'ennemi à plus de chance d'esquive et de chance de crittique")
+                     System.out.println("L'ennemi à plus de chance d'esquive et de crittique")
                  }
              }
          }

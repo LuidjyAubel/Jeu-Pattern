@@ -1,7 +1,5 @@
 package fr.jeu.pattern.entity
 
-import fr.jeu.pattern.stats
-
 class Joueur() : stats {
     /**
      * Stats par défaut joueur
@@ -18,7 +16,7 @@ class Joueur() : stats {
     private var nbTourDef : Int = 0
     private var limiteTourDef : Int = 1
     private var nbBalle : Int = 0
-    private var nbBalleMax : Int = 2
+    private var nbBalleMax : Int = 200
     private var nbBalleRecharge : Int = 1
 
     override fun getLvl(): Int {

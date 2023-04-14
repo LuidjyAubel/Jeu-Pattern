@@ -1,4 +1,4 @@
-package fr.jeu.pattern
+package fr.jeu.pattern.entity
 
 interface stats {
     /**

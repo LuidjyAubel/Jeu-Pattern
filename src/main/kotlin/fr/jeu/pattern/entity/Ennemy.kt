@@ -3,7 +3,6 @@ package fr.jeu.pattern.entity
 import fr.jeu.pattern.etatDeBoss
 import fr.jeu.pattern.state.etatEnnemy
 import fr.jeu.pattern.state.etatNormal
-import fr.jeu.pattern.stats
 
 open class Ennemy() : stats {
     /**
