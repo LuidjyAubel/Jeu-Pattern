@@ -9,18 +9,20 @@ class combat {
 
     companion object {
 
-        private lateinit var p : Joueur
-        private lateinit var ennemy : Ennemy
-        private var degatJ = 0.0
-        private var comportementFinCombat: () -> Unit = {
+        lateinit var p : Joueur
+        lateinit var ennemy : Ennemy
+        var degatJ = 0.0
+        var comportementFinCombat: () -> Unit = {
             p.setNbBalle(0)
             p.setNbTourDef(0)
         }
-        private var comportementDebutCombat: () -> Unit = {
+        var comportementDebutCombat: () -> Unit = {
         }
-        private var comportementAtqSpeJoueur: () -> Unit = {
+        var comportementAtqSpeJoueur: () -> Unit = {
+            degatJ = degatJ - ennemy.getDef()
         }
-
+        var comportementDefense : () -> Unit = {
+        }
 
         /**
          * Effectue le combat
@@ -75,61 +77,6 @@ class combat {
         }
 
         /**
-         * set degatJ
-         */
-        fun setDegatJ(x:Double){
-            degatJ = x
-        }
-
-        /**
-         * get degatJ
-         */
-        fun getDegatJ(): Double {
-            return degatJ
-        }
-
-        /**
-         * Set le comportement fin combat
-         */
-        fun setComportementFinCombat(leComportement: () -> Unit){
-            comportementFinCombat = leComportement
-        }
-
-        /**
-         * @return le comportement fin combat
-         */
-        fun getComportementFinCombat(): () -> Unit {
-            return comportementFinCombat
-        }
-
-        /**
-         * Set le comportement fin combat
-         */
-        fun setComportementAtqSpeJoueur(leComportement: () -> Unit){
-            comportementAtqSpeJoueur = leComportement
-        }
-
-        /**
-         * @return le comportement fin combat
-         */
-        fun getComportementAtqSpeJoueur(): () -> Unit {
-            return comportementAtqSpeJoueur
-        }
-
-        /**
-         * Set le comportement debut combat
-         */
-        fun setComportementDebutCombat(leComportement: () -> Unit){
-            comportementDebutCombat = leComportement
-        }
-
-        /**
-         * @return le comportement debut combat
-         */
-        fun getComportementDebutCombat(): () -> Unit {
-            return comportementDebutCombat
-        }
-        /**
          * Effectue l'action atq du joueur
          */
         fun atqJoueur(): Boolean {
@@ -158,15 +105,15 @@ class combat {
                         println("\nCoup crittique !!!")
                         degatJ = (degatJ * p.getDegatCrittique())
                     }
-                    degatJ = degatJ - ennemy.getDef()
                     var dodge = ennemy.getDodge()
                     var pDodge = ((0..100).random().toDouble())/100
                     if(dodge >= pDodge){
                         println("\nEsquive !!!")
                         degatJ = 0.0
+                    } else {
+                        comportementAtqSpeJoueur()
                     }
                     if(degatJ > 0){
-                        comportementAtqSpeJoueur()
                         ennemy.setPv(ennemy.getPv() - degatJ)
                     } else {
                         degatJ = 0.0
@@ -284,6 +231,8 @@ class combat {
                         degat = 0.0
                     }
                     println("\nDégats subis : "+degat+" !!!\n")
+                } else {
+                    comportementDefense()
                 }
             }
             return error

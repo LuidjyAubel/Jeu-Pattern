@@ -19,6 +19,8 @@ open class magasin() {
             lesComp.add(Competence(1,"Récupérer 10% de pv/combat",))
             lesComp.add(Competence(2,"Commencer avec 25% du chargeur",))
             lesComp.add(Competence(3,"Permet de fusionner les balles pour multiplier les dégats",))
+            lesComp.add(Competence(4,"50% des dégats infligé ignore l'armure ennemi",))
+            lesComp.add(Competence(5,"Bloqué restore 10% des dégats que l'ennemi aurait du vous infliger",))
         }
 
         /**
@@ -286,8 +288,8 @@ open class magasin() {
                         println("Pas assez de points disponible")
                     } else {
                         p.delLvl(cout)
-                        combat.setComportementFinCombat {
-                            combat.getComportementFinCombat()
+                        combat.comportementFinCombat = {
+                            combat.comportementFinCombat()
                             var regen = (p.getPvMax().toDouble() / 10)
                             if (regen + p.getPv() > p.getPvMax()) {
                                 p.setPv(p.getPvMax().toDouble())
@@ -308,8 +310,8 @@ open class magasin() {
                         println("Pas assez de points disponible")
                     } else {
                         p.delLvl(cout)
-                        combat.setComportementDebutCombat {
-                            combat.getComportementDebutCombat()
+                        combat.comportementDebutCombat = {
+                            combat.comportementDebutCombat()
                             var newMax: Double = (p.getNbBalleMax().toDouble() / 4)
                             if (newMax < 1) {
                                 newMax = 1.0
@@ -329,13 +331,13 @@ open class magasin() {
                         println("Pas assez de points disponible")
                     } else {
                         p.delLvl(cout)
-                        combat.setComportementAtqSpeJoueur {
+                        combat.comportementAtqSpeJoueur = {
                             if(p.getNbBalle()>1) {
                                 println("Combiens de balles voulez vous tirer? (balles dispo : ${p.getNbBalle()}")
                                 try {
                                     var q = scanner.nextLine().toInt()
                                     if (q <= p.getNbBalle()){
-                                        combat.setDegatJ(combat.getDegatJ() * q)
+                                        combat.degatJ *= q
                                         println("$q balle ont été tiré")
                                     } else {
                                         println("1 balle à été tiré")
@@ -344,7 +346,7 @@ open class magasin() {
                                     println("1 balle à été tiré")
                                 }
                             }
-                            combat.getComportementAtqSpeJoueur()
+                            combat.comportementAtqSpeJoueur()
                         }
                         println("Achat validé")
                         nbAchatsEffect++
@@ -353,9 +355,53 @@ open class magasin() {
                 }
 
                 "4" -> {
+                    if(lesComp.get(3).getAcheter()){
+                        println("La compétence à effets à déjà été acheté!")
+                    } else if (cout > p.getLvl()) {
+                        println("Pas assez de points disponible")
+                    } else {
+                        p.delLvl(cout)
+                        combat.comportementAtqSpeJoueur = {
+                            combat.comportementAtqSpeJoueur()
+                            combat.degatJ += (combat.ennemy.getDef().toDouble()/2)
+                        }
+                        println("Achat validé")
+                        nbAchatsEffect++
+                        lesComp.get(3).setAcheter()
+                    }
                 }
 
                 "5" -> {
+                    if(lesComp.get(4).getAcheter()){
+                        println("La compétence à effets à déjà été acheté!")
+                    } else if (cout > p.getLvl()) {
+                        println("Pas assez de points disponible")
+                    } else {
+                        p.delLvl(cout)
+                        combat.comportementDefense = {
+                            var degat : Double = combat.ennemy.getDegatMin()+(0..combat.ennemy.getDegatMax()).random().toDouble()
+                            var crittique = combat.ennemy.getCrittique()
+                            var pCrittique = ((0..100).random().toDouble())/100
+                            if(crittique >= pCrittique){
+                                degat = (degat * combat.ennemy.getDegatCrittique())
+                            }
+                            if(degat > 0){
+                                var regen = degat / 10
+                                if (regen + p.getPv() > p.getPvMax()) {
+                                    p.setPv(p.getPvMax().toDouble())
+                                } else {
+                                    p.setPv(p.getPv() + regen)
+                                    println("Vous avez récupéré $regen pv")
+                                }
+                                p.getPv()
+                            } else {
+                                degat = 0.0
+                            }
+                        }
+                        println("Achat validé")
+                        nbAchatsEffect++
+                        lesComp.get(4).setAcheter()
+                    }
                 }
             }
             return p.getLvl()
